@@ -1,3 +1,5 @@
+import btn2  from "./btn2"
+
 const {ccclass, property} = cc._decorator;
 
 @ccclass
@@ -18,8 +20,14 @@ export default class Helloworld extends cc.Component {
     @property(cc.SpriteAtlas)
     atlas : cc.SpriteAtlas = null;
     
+    @property(cc.Sprite)
+    main_spirte : cc.Sprite = null;
+
     @property
     flag = true
+
+    @property(cc.Prefab)
+    button2 : cc.Prefab = null;
 
     start () {
         // init logic
@@ -40,6 +48,19 @@ export default class Helloworld extends cc.Component {
             this.sprite.spriteFrame = frame;
         else
             cc.error("frame is null.");
+
+        //
+        let _btn2 = cc.instantiate(this.button2);
+        this.node.addChild(_btn2);
+
+        //
+        let _btn2_comp = _btn2.getComponent(btn2);
+        this.main_spirte.spriteFrame = _btn2_comp.getFrame("hall_area_1");        
+        _btn2_comp.startClickLisnter();
+
+        //
+        _btn2_comp.btn_self.normalSprite = _btn2_comp.getFrame("hall_room_1_0");
+        _btn2_comp.btn_self.hoverSprite = _btn2_comp.getFrame("hall_room_2_2");
     }
 
     //
