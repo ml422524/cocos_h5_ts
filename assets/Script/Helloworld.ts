@@ -29,6 +29,9 @@ export default class Helloworld extends cc.Component {
     @property(cc.Prefab)
     button2 : cc.Prefab = null;
 
+    @property(cc.ScrollView)
+    scrollView : cc.ScrollView = null;
+
     start () {
         // init logic
         // 设置标签的内容
@@ -61,6 +64,20 @@ export default class Helloworld extends cc.Component {
         //
         _btn2_comp.btn_self.normalSprite = _btn2_comp.getFrame("hall_room_1_0");
         _btn2_comp.btn_self.hoverSprite = _btn2_comp.getFrame("hall_room_2_2");
+
+        //
+        for(let i = 0; i < 2; i++)
+        {
+            let btntmp = cc.instantiate(this.botton);
+            if(btntmp)
+            {
+                cc.log("instantiate a button.");
+                let layout = this.scrollView.content.getChildByName("layout");
+                layout.addChild(btntmp);
+            }
+            else
+            cc.error("btntmp is null.");
+        }
     }
 
     //
